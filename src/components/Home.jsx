@@ -1,10 +1,6 @@
 import React from "react";
 const Home = () => {
-  return (
-    <section className="hero">
-      <h1>Welcome to the Home</h1>
-    </section>
-  );
+  return <div style={{ marginTop: "100px" }}>Home</div>;
 };
 
 export default Home;

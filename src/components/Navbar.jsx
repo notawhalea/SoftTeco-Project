@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Navbar.css";
+import styles from "./Navbar.module.css";
 import { Link, NavLink } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
@@ -9,43 +9,46 @@ const Navbar = () => {
   const [mobile, setMobile] = useState(false);
   return (
     <>
-      <nav className="navbar">
+      <nav className={styles.navbar}>
         <div style={{ display: "flex" }}>
-          <TbCurrencyEthereum className="curr-logo" />
+          <TbCurrencyEthereum className={styles.currLogo} />
           <NavLink
             to="/"
             end
             style={{ textDecoration: "none", color: "black" }}
           >
-            <h3 className="logo">CryptØn</h3>
+            <h3 className={styles.logo}>CryptØn</h3>
           </NavLink>
         </div>
         <ul
-          className={mobile ? "nav-links-mobile" : "nav-links"}
+          className={mobile ? styles.navLinksMobile : styles.navLinks}
           onClick={() => setMobile(false)}
         >
           <li>
-            <Link to="/" className="home">
+            <Link to="/" style={{ color: "black" }}>
               Home
             </Link>
           </li>
           <li>
-            <Link to="/cryptocurrencies" className="cryptocurrencies">
-              CryptoCurrencies
+            <Link to="/cryptocurrencies" style={{ color: "black" }}>
+              Cryptocurrencies
             </Link>
           </li>
           <li>
-            <Link to="/exchanges" className="exchanges">
+            <Link to="/exchanges" style={{ color: "black" }}>
               Exchanges
             </Link>
           </li>
           <li>
-            <Link to="/news" className="news">
+            <Link to="/news" style={{ color: "black" }}>
               News
             </Link>
           </li>
         </ul>
-        <button className="mobile-menu-icon" onClick={() => setMobile(!mobile)}>
+        <button
+          className={styles.mobileMenuIcon}
+          onClick={() => setMobile(!mobile)}
+        >
           {mobile ? <ImCross /> : <FaBars />}
         </button>
       </nav>
