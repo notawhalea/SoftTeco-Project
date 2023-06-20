@@ -24,18 +24,26 @@ const Navbar = () => {
           className={mobile ? "nav-links-mobile" : "nav-links"}
           onClick={() => setMobile(false)}
         >
-          <Link to="/" className="home">
-            <li>Home</li>
-          </Link>
-          <Link to="/cryptocurrencies" className="cryptocurrencies">
-            <li>CryptoCurrencies</li>
-          </Link>
-          <Link to="/exchanges" className="exchanges">
-            <li>Exchanges</li>
-          </Link>
-          <Link to="/news" className="news">
-            <li>News</li>
-          </Link>
+          <li>
+            <Link to="/" className="home">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/cryptocurrencies" className="cryptocurrencies">
+              CryptoCurrencies
+            </Link>
+          </li>
+          <li>
+            <Link to="/exchanges" className="exchanges">
+              Exchanges
+            </Link>
+          </li>
+          <li>
+            <Link to="/news" className="news">
+              News
+            </Link>
+          </li>
         </ul>
         <button className="mobile-menu-icon" onClick={() => setMobile(!mobile)}>
           {mobile ? <ImCross /> : <FaBars />}
