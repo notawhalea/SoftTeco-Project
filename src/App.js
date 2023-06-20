@@ -20,8 +20,6 @@ const App = () => {
             <Route path="/news" element={<News />} />
           </Route>
         </Routes>
-        <div className="main"></div>
-        <div className="footer"></div>
       </div>
     </BrowserRouter>
   );
