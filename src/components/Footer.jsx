@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <div className={styles.footer}>
       <div style={{ display: "flex" }}>
-        <TbCurrencyEthereum className="curr-logo" />
+        <TbCurrencyEthereum className={styles.logo} />
         <NavLink to="/" end style={{ textDecoration: "none", color: "white" }}>
           <h3 className="logo">CryptØn</h3>
         </NavLink>
