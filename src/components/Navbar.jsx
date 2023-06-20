@@ -1,16 +1,25 @@
 import React, { useState } from "react";
 import "./Navbar.css";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
+import { TbCurrencyEthereum } from "react-icons/tb";
 
 const Navbar = () => {
   const [Mobile, setMobile] = useState(false);
   return (
     <>
       <nav className="navbar">
-        <h3 className="logo">Crypton</h3>
-
+        <div style={{ display: "flex" }}>
+          <TbCurrencyEthereum className="curr-logo" />
+          <NavLink
+            to="/"
+            end
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <h3 className="logo">CryptØn</h3>
+          </NavLink>
+        </div>
         <ul
           className={Mobile ? "nav-links-mobile" : "nav-links"}
           onClick={() => setMobile(false)}

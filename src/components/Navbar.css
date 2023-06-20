@@ -38,6 +38,10 @@ li {
     cursor: pointer;
     text-transform: capitalize;
 }
+.curr-logo {
+    font-size: 32px;
+    margin-top: 6px;
+}
 .hero {
     text-align: center;
     margin-top: 15%;
@@ -55,12 +59,18 @@ button {
     font-size: 20px;
     background: none;
 }
-@media (max-width: 868px) {
+@media (max-width: 898px) {
+    .curr-logo {
+        display: flex;
+        position: absolute;
+        top: 1%;
+        left: 28px;
+    }
     .logo {
         display: flex;
         position: absolute;
         top: 1%;
-        left: 35px;
+        left: 58px;
     }
     .nav-links {
         display: none;
