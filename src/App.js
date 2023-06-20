@@ -1,17 +1,29 @@
 import React from "react";
-import { Switch, Link, Route } from "react-router-dom";
-import { Layout, Typography, Space } from "antd";
-import Navbar from "./components/Navbar";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Cryptocurrencies from "./components/Cryptocurrencies";
+import Exchanges from "./components/Exchanges";
+import News from "./components/News";
+import NotFound from "./components/NotFound";
+import MainLayout from "./layouts/MainLayout";
+import Home from "./components/Home";
 
 const App = () => {
   return (
-    <div className="app">
-      <div className="navbar">
-        <Navbar />
+    <BrowserRouter>
+      <div className="app">
+        <Routes>
+          <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<MainLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/cryptocurrencies" element={<Cryptocurrencies />} />
+            <Route path="/exchanges" element={<Exchanges />} />
+            <Route path="/news" element={<News />} />
+          </Route>
+        </Routes>
+        <div className="main"></div>
+        <div className="footer"></div>
       </div>
-      <div className="main"></div>
-      <div className="footer"></div>
-    </div>
+    </BrowserRouter>
   );
 };
 
