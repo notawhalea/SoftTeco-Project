@@ -3,23 +3,15 @@ import millify from "millify";
 import { Typography, Row, Col, Statistic } from "antd";
 import { Link } from "react-router-dom";
 import { useGetCryptosQuery } from "../app/services/cryptoApi";
+import result from "../app/features/cryptoSlice";
 
 const { Title } = Typography;
 
 const Home = () => {
-  const { data, isLoading, error } = useGetCryptosQuery();
-  console.log(data);
-  // const options = {
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     "x-access-token":
-  //       "coinranking21292cbb5e73cd72f912fab5b762129de649b0013c285868",
-  //   },
-  // };
-  //
-  // fetch("https://api.coinranking.com/v2/reference-currencies", options)
-  //   .then((response) => response.json())
-  //   .then((result) => console.log(result));
+  // const { data, isLoading, error } = useGetCryptosQuery();
+  // console.log(data);
+  console.log(result);
+  console.log(result.data.stats.total);
   return (
     <>
       <Title level={2} className="heading">
