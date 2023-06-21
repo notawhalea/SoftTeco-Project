@@ -13,9 +13,7 @@ li {
     list-style-type: none;
     color: black;
 }
-Link {
-    color: black;
-}
+
 .navbar {
     display: flex;
     justify-content: space-around;

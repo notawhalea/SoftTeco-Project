@@ -5,15 +5,7 @@ const Coin = ({ iconUrl, symbol, name, coinrankingUrl }) => {
     <div className={style.mainEl}>
       <img src={iconUrl} alt={symbol} />
       <h3>{name}</h3>
-      <a
-        href={coinrankingUrl}
-        style={{
-          color: "gray",
-          fontFamily: "cursive",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
+      <a href={coinrankingUrl} className={style.linkEl} style={{}}>
         Read more
       </a>
     </div>

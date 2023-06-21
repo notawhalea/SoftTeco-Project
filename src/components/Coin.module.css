@@ -23,4 +23,10 @@ h3 {
     display: flex;
     justify-content: center;
 }
+.linkEl {
+    color: gray;
+    font-family: cursive;
+    display: flex;
+    justify-content: center
+}
 

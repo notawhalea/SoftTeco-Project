@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import millify from "millify";
 import { Typography, Row, Col, Statistic } from "antd";
 import { Link } from "react-router-dom";
@@ -6,15 +6,35 @@ import { useGetCryptosQuery } from "../app/services/cryptoApi";
 import result from "../app/features/cryptoSlice";
 import Coin from "./Coin";
 import styles from "./Home.module.css";
+import axios from "axios";
 
 const { Title } = Typography;
 
+let data = {};
+
+const options = {
+  method: "GET",
+  url: "https://coinranking1.p.rapidapi.com/stats",
+  params: {
+    referenceCurrencyUuid: "yhjMzLPhuIDl",
+  },
+  headers: {
+    "X-RapidAPI-Key": "eb71184572msh8f332283060f7cbp1f341fjsnc4685458b6c2",
+    "X-RapidAPI-Host": "coinranking1.p.rapidapi.com",
+  },
+};
+
+try {
+  const response = await axios.request(options);
+  data = response;
+  console.log(data);
+  console.log(response);
+} catch (error) {
+  console.error(error);
+}
 const Home = () => {
-  // const { data, isLoading, error } = useGetCryptosQuery();
-  // console.log(data);
-  console.log(result);
-  const globalStats = result.data;
-  console.log(result.data.total);
+  const globalStats = data.data.data;
+
   return (
     <div className={styles.homeEl}>
       <Title level={1} className={styles.heading}>
@@ -61,7 +81,7 @@ const Home = () => {
         </Row>
       </div>
 
-      <div className="home-heading-container">
+      <div>
         <Title level={1} className={styles.chartTitle}>
           Chart of the Week
         </Title>
@@ -73,6 +93,7 @@ const Home = () => {
             {globalStats.bestCoins.map((index) => {
               return (
                 <Coin
+                  key={index.uuid}
                   iconUrl={index.iconUrl}
                   symbol={index.symbol}
                   name={index.name}
@@ -90,6 +111,7 @@ const Home = () => {
             {globalStats.newestCoins.map((index) => {
               return (
                 <Coin
+                  key={index.uuid}
                   iconUrl={index.iconUrl}
                   symbol={index.symbol}
                   name={index.name}

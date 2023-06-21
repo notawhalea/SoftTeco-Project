@@ -14,8 +14,8 @@ const Footer = () => {
       </div>
       <div>All rights reserved</div>
       <div>
-        Created by <a href="https://github.com/notawhalea">Nikita</a> &&{" "}
-        <a href="https://github.com/AndrewZanko">Andrey</a>
+        Created by <a href="https://github.com/notawhalea">Nikita</a> &&
+        <a href="https://github.com/AndrewZanko"> Andrey</a>
       </div>
     </div>
   );
