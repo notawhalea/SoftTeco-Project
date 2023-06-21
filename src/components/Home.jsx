@@ -27,13 +27,23 @@ const options = {
 try {
   const response = await axios.request(options);
   data = response;
-  console.log(data);
-  console.log(response);
 } catch (error) {
   console.error(error);
 }
 const Home = () => {
   const globalStats = data.data.data;
+  const [coin, setCoins] = useState([]);
+  const getData = async () => {
+    const { data } = await axios.request(options);
+    setCoins(data);
+  };
+  useEffect(() => {
+    getData();
+    console.log("sss", coin);
+  }, [setCoins]);
+
+  console.log("bbbb", coin);
+  console.log(JSON.stringify(coin.data));
 
   return (
     <div className={styles.homeEl}>
