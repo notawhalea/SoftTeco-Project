@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+.crypto-card-container{
+    min-height: 65vh !important;
+    margin-top: 1%;
+    padding-left: 9%;
+    padding-right: 10%;
+}
+.crypto-card{
+    min-width: 250px;
+}
+.crypto-card .crypto-image{
+    width:35px;
+}
+.title-first {
+    font-weight: bold;
+}
+.title-next {
+    font-weight: normal;
+}

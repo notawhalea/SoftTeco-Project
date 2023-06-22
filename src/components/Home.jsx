@@ -22,28 +22,21 @@ const options = {
   },
 };
 const Home = () => {
-  const fetchDataCall = async () => {
-    let apiReturn = await axios
-      .request(options)
-      .then(async function (response) {
-        return response;
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    return apiReturn;
-  };
-
-  const [data, setData] = useState([]);
+  const [coins, setCoins] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      let response = await fetchDataCall();
-      setData(response.data.data);
+      const apiReturn = await axios
+        .request(options)
+        .then(function (response) {
+          setCoins(response.data?.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     };
     fetchData();
   }, []);
-  const globalStats = data;
   return (
     <div className={styles.homeEl}>
       <Title level={1} className={styles.heading}>
@@ -54,37 +47,37 @@ const Home = () => {
           <Col span={12} style={{ textAlign: "center" }}>
             <Statistic
               title="Total Cryptocurrencies"
-              value={globalStats.totalCoins}
+              value={coins.totalCoins}
             />
           </Col>
           <Col span={12} style={{ textAlign: "center" }}>
             <Statistic
               title="Total Exchanges"
-              value={millify(globalStats.totalExchanges)}
+              value={millify(coins.totalExchanges)}
             />
           </Col>
           <Col span={12} style={{ textAlign: "center" }}>
             <Statistic
               title="Total Market Cap"
-              value={millify(globalStats.totalMarketCap)}
+              value={millify(coins.totalMarketCap)}
             />
           </Col>
           <Col span={12} style={{ textAlign: "center" }}>
             <Statistic
               title="Total 24h Volume"
-              value={millify(globalStats.total24hVolume)}
+              value={millify(coins.total24hVolume)}
             />
           </Col>
           <Col span={12} style={{ textAlign: "center" }}>
             <Statistic
               title="Total Markets"
-              value={millify(globalStats.totalMarkets)}
+              value={millify(coins.totalMarkets)}
             />
           </Col>
           <Col span={12} style={{ textAlign: "center" }}>
             <Statistic
               title="Bitcoin Dominance"
-              value={millify(globalStats.btcDominance)}
+              value={millify(coins.btcDominance)}
             />
           </Col>
         </Row>
@@ -99,7 +92,7 @@ const Home = () => {
             Best Coins
           </Title>
           <div style={{ display: "flex", justifyContent: "space-around" }}>
-            {globalStats.bestCoins?.map((index) => {
+            {coins.bestCoins?.map((index) => {
               return (
                 <Coin
                   key={index.uuid}
@@ -117,7 +110,7 @@ const Home = () => {
             Newest Coins
           </Title>
           <div style={{ display: "flex", justifyContent: "space-around" }}>
-            {globalStats.newestCoins?.map((index) => {
+            {coins.newestCoins?.map((index) => {
               return (
                 <Coin
                   key={index.uuid}
