@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import millify from "millify";
 import { Typography, Row, Col, Statistic } from "antd";
-import { Link } from "react-router-dom";
-import { useGetCryptosQuery } from "../app/services/cryptoApi";
-import result from "../app/features/cryptoSlice";
 import Coin from "./Coin";
 import styles from "./Home.module.css";
 import axios from "axios";

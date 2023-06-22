@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Typography, Row, Col, Statistic, Card } from "antd";
+import { Typography, Row, Col, Card, Input } from "antd";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import millify from "millify";
 import "./Cryptocur.module.css";
-import styles from "./Home.module.css";
 
 const { Title } = Typography;
 
@@ -21,26 +20,37 @@ const optionsCoins = {
 };
 const Cryptocurrencies = () => {
   const [cryptos, setCryptos] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       const apiReturn = await axios
         .request(optionsCoins)
         .then(function (response) {
-          setCryptos(response.data?.data?.coins);
+          const filteredData = response.data?.data?.coins.filter((coin) =>
+            coin.name.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+          setCryptos(filteredData);
         })
         .catch(function (error) {
           console.log(error);
         });
     };
     fetchData();
-  }, []);
+  }, [cryptos, searchTerm]);
   console.log("resp", cryptos);
   return (
     <div style={{ marginTop: "1%", marginLeft: "8%", marginRight: "9%" }}>
       <Title level={1} style={{ marginLeft: "33%" }}>
         Top 50 World Cryptocurrencies
       </Title>
+      <div className="search-crypto" style={{ paddingBottom: "2%" }}>
+        <Input
+          placeholder="Search Cryptocurrency"
+          onChange={(e) => setSearchTerm(e.target.value)}
+          size="large"
+        />
+      </div>
       <Row gutter={[32, 32]} className="crypto-card-container">
         {cryptos.map((currency) => (
           <Col
@@ -52,8 +62,13 @@ const Cryptocurrencies = () => {
           >
             <Link to={`/crypto/${currency.name}`}>
               <Card
-                title={currency.name}
-                extra={<img className="crypto-image" src={currency.iconUrl} />}
+                extra={
+                  <img
+                    className="crypto-image"
+                    src={currency.iconUrl}
+                    alt="crypto-image"
+                  />
+                }
                 hoverable
               >
                 <p className="title-first">{`${currency.rank}. ${currency.name}`}</p>
