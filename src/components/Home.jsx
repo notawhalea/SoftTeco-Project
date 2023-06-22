@@ -10,7 +10,7 @@ import axios from "axios";
 
 const { Title } = Typography;
 
-let data = {};
+// let data = {};
 
 const options = {
   method: "GET",
@@ -23,28 +23,31 @@ const options = {
     "X-RapidAPI-Host": "coinranking1.p.rapidapi.com",
   },
 };
-
-try {
-  const response = await axios.request(options);
-  data = response;
-} catch (error) {
-  console.error(error);
-}
 const Home = () => {
-  const globalStats = data.data.data;
-  const [coin, setCoins] = useState([]);
-  const getData = async () => {
-    const { data } = await axios.request(options);
-    setCoins(data);
+  const fetchDataCall = async () => {
+    let apiReturn = await axios
+      .request(options)
+      .then(async function (response) {
+        return response;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    return apiReturn;
   };
+
+  const [data, setData] = useState("");
+
   useEffect(() => {
-    getData();
-    console.log("sss", coin);
-  }, [setCoins]);
-
-  console.log("bbbb", coin);
-  console.log(JSON.stringify(coin.data));
-
+    const fetchData = async () => {
+      let response = await fetchDataCall();
+      setData(response.data.data);
+    };
+    fetchData();
+  }, [setData]);
+  console.log("ddd", data);
+  const globalStats = data;
+  console.log("gggg", globalStats);
   return (
     <div className={styles.homeEl}>
       <Title level={1} className={styles.heading}>
