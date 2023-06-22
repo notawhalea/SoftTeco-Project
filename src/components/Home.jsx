@@ -10,8 +10,6 @@ import axios from "axios";
 
 const { Title } = Typography;
 
-// let data = {};
-
 const options = {
   method: "GET",
   url: "https://coinranking1.p.rapidapi.com/stats",
@@ -36,7 +34,7 @@ const Home = () => {
     return apiReturn;
   };
 
-  const [data, setData] = useState("");
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,10 +42,8 @@ const Home = () => {
       setData(response.data.data);
     };
     fetchData();
-  }, [setData]);
-  console.log("ddd", data);
+  }, []);
   const globalStats = data;
-  console.log("gggg", globalStats);
   return (
     <div className={styles.homeEl}>
       <Title level={1} className={styles.heading}>
@@ -103,7 +99,7 @@ const Home = () => {
             Best Coins
           </Title>
           <div style={{ display: "flex", justifyContent: "space-around" }}>
-            {globalStats.bestCoins.map((index) => {
+            {globalStats.bestCoins?.map((index) => {
               return (
                 <Coin
                   key={index.uuid}
@@ -121,7 +117,7 @@ const Home = () => {
             Newest Coins
           </Title>
           <div style={{ display: "flex", justifyContent: "space-around" }}>
-            {globalStats.newestCoins.map((index) => {
+            {globalStats.newestCoins?.map((index) => {
               return (
                 <Coin
                   key={index.uuid}
