@@ -11,7 +11,9 @@ a {
 }
 li {
     list-style-type: none;
+    color: black;
 }
+
 .navbar {
     display: flex;
     justify-content: space-around;
@@ -24,13 +26,13 @@ li {
 .logo {
     font-size: 30px;
 }
-.nav-links {
+.navLinks {
     display: flex;
     justify-content: flex-end;
     width: 75%;
 }
 
-.nav-links li {
+.navLinks li {
     color: black;
     font-size: 20px;
     padding: 10px 20px;
@@ -38,7 +40,7 @@ li {
     cursor: pointer;
     text-transform: capitalize;
 }
-.curr-logo {
+.currLogo {
     font-size: 32px;
     margin-top: 6px;
 }
@@ -50,7 +52,7 @@ li {
     text-align: center;
     font-size: 80px;
 }
-.mobile-menu-icon {
+.mobileMenuIcon {
     display: none;
 }
 button {
@@ -60,22 +62,22 @@ button {
     background: none;
 }
 @media (max-width: 898px) {
-    .curr-logo {
+    .currLogo {
         display: flex;
         position: absolute;
-        top: 1%;
+        top: 2%;
         left: 28px;
     }
     .logo {
         display: flex;
         position: absolute;
-        top: 1%;
+        top: 2%;
         left: 58px;
     }
-    .nav-links {
+    .navLinks {
         display: none;
     }
-    .nav-links-mobile {
+    .navLinksMobile {
         position: absolute;
         display: block;
         list-style: none;
@@ -92,7 +94,7 @@ button {
         transition: all 0.5s ease-in-out;
         text-align: center;
     }
-    .mobile-menu-icon {
+    .mobileMenuIcon {
         position: absolute;
         display: block;
         right: 20px;

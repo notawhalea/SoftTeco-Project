@@ -6,6 +6,7 @@ import News from "./components/News";
 import NotFound from "./components/NotFound";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./components/Home";
+import CryptoDetails from "./components/CryptoDetails";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/cryptocurrencies" element={<Cryptocurrencies />} />
             <Route path="/exchanges" element={<Exchanges />} />
+            <Route path="/crypto/:coinId" element={<CryptoDetails />} />
             <Route path="/news" element={<News />} />
           </Route>
         </Routes>

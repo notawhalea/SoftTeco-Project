@@ -1,11 +1,7 @@
 import React from "react";
 
 const News = () => {
-  return (
-    <section className="hero">
-      <h1>Welcome to the News</h1>
-    </section>
-  );
+  return <div>News</div>;
 };
 
 export default News;
