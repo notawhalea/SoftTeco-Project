@@ -1,23 +1,17 @@
 import React, { useState, useEffect } from "react";
 import millify from "millify";
 import { Typography, Row, Col, Statistic } from "antd";
-import Coin from "./Coin";
+import Coin from "../Coin";
 import styles from "./Home.module.css";
 import axios from "axios";
 
+import { url, params, headers } from "./consts";
+import optionsCreator from "../../app/optionsCreator";
+
 const { Title } = Typography;
 
-const options = {
-  method: "GET",
-  url: "https://coinranking1.p.rapidapi.com/stats",
-  params: {
-    referenceCurrencyUuid: "yhjMzLPhuIDl",
-  },
-  headers: {
-    "X-RapidAPI-Key": "eb71184572msh8f332283060f7cbp1f341fjsnc4685458b6c2",
-    "X-RapidAPI-Host": "coinranking1.p.rapidapi.com",
-  },
-};
+const options = optionsCreator(url, params, headers);
+
 const Home = () => {
   const [coins, setCoins] = useState([]);
 

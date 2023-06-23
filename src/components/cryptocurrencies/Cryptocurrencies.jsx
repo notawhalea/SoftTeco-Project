@@ -5,20 +5,12 @@ import { Link } from "react-router-dom";
 import millify from "millify";
 
 import styles from "./Cryptocur.module.css";
+import { url, params, headers } from "./consts";
+import optionsCreator from "../../app/optionsCreator";
 
 const { Title } = Typography;
 
-const optionsCoins = {
-  method: "GET",
-  url: "https://coinranking1.p.rapidapi.com/coins",
-  params: {
-    referenceCurrencyUuid: "yhjMzLPhuIDl",
-  },
-  headers: {
-    "X-RapidAPI-Key": "eb71184572msh8f332283060f7cbp1f341fjsnc4685458b6c2",
-    "X-RapidAPI-Host": "coinranking1.p.rapidapi.com",
-  },
-};
+const optionsCoins = optionsCreator(url, params, headers);
 const Cryptocurrencies = () => {
   const [cryptos, setCryptos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -28,17 +20,19 @@ const Cryptocurrencies = () => {
       const apiReturn = await axios
         .request(optionsCoins)
         .then(function (response) {
-          const filteredData = response.data?.data?.coins.filter((coin) =>
-            coin.name.toLowerCase().includes(searchTerm.toLowerCase())
-          );
-          setCryptos(filteredData);
+          setCryptos(response.data?.data?.coins);
         })
         .catch(function (error) {
           console.log(error);
         });
     };
     fetchData();
-  }, [cryptos, searchTerm]);
+  }, [searchTerm]);
+
+  const filteredData = cryptos.filter((coin) =>
+    coin.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div style={{ marginTop: "1%" }}>
       <Title level={1} style={{ marginLeft: "33%" }}>
@@ -51,8 +45,8 @@ const Cryptocurrencies = () => {
           size="large"
         />
       </div>
-      <Row gutter={[36, 36]} className={styles.cryptoCardContainer}>
-        {cryptos.map((currency) => (
+      <Row gutter={[24, 24]} className={styles.cryptoCardContainer}>
+        {filteredData.map((currency) => (
           <Col
             xs={24}
             sm={12}

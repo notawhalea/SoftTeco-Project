@@ -3,24 +3,14 @@ import axios from "axios";
 import { Avatar, Card, Col, Row, Typography } from "antd";
 import styles from "./News.module.css";
 import moment from "moment";
+import { url, params, headers } from "./consts";
+import optionsCreator from "../../app/optionsCreator";
 
 const { Title, Text } = Typography;
 
 const demoImage =
   "https://s2.coinmarketcap.com/static/img/coins/200x200/1975.png";
-const optionsNews = {
-  method: "GET",
-  url: 'https://bing-news-search1.p.rapidapi.com/news/search?q=cryptocurrency&qft=interval%3d"7"&form=PTFTNR&count=47',
-  params: {
-    safeSearch: "Off",
-    textFormat: "Raw",
-  },
-  headers: {
-    "X-BingApis-SDK": "true",
-    "X-RapidAPI-Key": "eb71184572msh8f332283060f7cbp1f341fjsnc4685458b6c2",
-    "X-RapidAPI-Host": "bing-news-search1.p.rapidapi.com",
-  },
-};
+const optionsNews = optionsCreator(url, params, headers);
 const News = () => {
   const [news, setNews] = useState([]);
 
@@ -49,21 +39,15 @@ const News = () => {
               <a href={newItem.url} target="_blank" rel="noreferrer">
                 <div className={styles.newsImageContainer}>
                   <Title className={styles.newsTitle} level={4}>
-                    {newItem.name.length > 75
-                      ? `${newItem.name.substring(0, 75)}...`
-                      : newItem.name}
+                    {newItem.name}
                   </Title>
                 </div>
                 <div style={{ display: "flex" }}>
                   <img
                     src={newItem?.image?.thumbnail?.contentUrl || demoImage}
-                    alt=""
+                    alt="news-image"
                   />
-                  <p className={styles.parDescription}>
-                    {newItem.description.length > 125
-                      ? `${newItem.description.substring(0, 125)}...`
-                      : newItem.description}
-                  </p>
+                  <p className={styles.parDescription}>{newItem.description}</p>
                 </div>
 
                 <div className={styles.providerContainer}>

@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Cryptocurrencies from "./components/Cryptocurrencies";
+import Cryptocurrencies from "./components/cryptocurrencies/Cryptocurrencies";
 import Exchanges from "./components/Exchanges";
-import News from "./components/News";
+import News from "./components/news/News";
 import NotFound from "./components/NotFound";
 import MainLayout from "./layouts/MainLayout";
-import Home from "./components/Home";
+import Home from "./components/home/Home";
 import CryptoDetails from "./components/CryptoDetails";
 
 const App = () => {
