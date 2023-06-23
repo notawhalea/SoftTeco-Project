@@ -55,7 +55,7 @@ const Cryptocurrencies = () => {
             className={styles.cryptoCard}
             key={currency.uuid}
           >
-            <Link to={`/crypto/${currency.name}`}>
+            <Link to={`/crypto/${currency.uuid}`}>
               <Card
                 cover={
                   <img
