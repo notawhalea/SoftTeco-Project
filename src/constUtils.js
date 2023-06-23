@@ -1,4 +1,4 @@
-function optionsCreator(url, params, headers) {
+function constUtils(url, params, headers) {
   return {
     method: "GET",
     url: url,
@@ -7,4 +7,4 @@ function optionsCreator(url, params, headers) {
   };
 }
 
-export default optionsCreator;
+export default constUtils;
