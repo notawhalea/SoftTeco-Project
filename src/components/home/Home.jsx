@@ -1,49 +1,33 @@
 import React, { useState, useEffect } from "react";
 import millify from "millify";
 import { Typography, Row, Col, Statistic } from "antd";
-import { Link } from "react-router-dom";
-import { useGetCryptosQuery } from "../app/services/cryptoApi";
-import result from "../app/features/cryptoSlice";
-import Coin from "./Coin";
+import Coin from "../Coin";
 import styles from "./Home.module.css";
 import axios from "axios";
 
+import { url, params, headers } from "./consts";
+import { getApiOptions } from "../../utils";
+
 const { Title } = Typography;
 
-const options = {
-  method: "GET",
-  url: "https://coinranking1.p.rapidapi.com/stats",
-  params: {
-    referenceCurrencyUuid: "yhjMzLPhuIDl",
-  },
-  headers: {
-    "X-RapidAPI-Key": "eb71184572msh8f332283060f7cbp1f341fjsnc4685458b6c2",
-    "X-RapidAPI-Host": "coinranking1.p.rapidapi.com",
-  },
-};
-const Home = () => {
-  const fetchDataCall = async () => {
-    let apiReturn = await axios
-      .request(options)
-      .then(async function (response) {
-        return response;
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    return apiReturn;
-  };
+const options = getApiOptions(url, params, headers);
 
-  const [data, setData] = useState([]);
+const Home = () => {
+  const [coins, setCoins] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      let response = await fetchDataCall();
-      setData(response.data.data);
+      const apiReturn = await axios
+        .request(options)
+        .then(function (response) {
+          setCoins(response.data?.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     };
     fetchData();
   }, []);
-  const globalStats = data;
   return (
     <div className={styles.homeEl}>
       <Title level={1} className={styles.heading}>
@@ -54,37 +38,37 @@ const Home = () => {
           <Col span={12} style={{ textAlign: "center" }}>
             <Statistic
               title="Total Cryptocurrencies"
-              value={globalStats.totalCoins}
+              value={coins.totalCoins}
             />
           </Col>
           <Col span={12} style={{ textAlign: "center" }}>
             <Statistic
               title="Total Exchanges"
-              value={millify(globalStats.totalExchanges)}
+              value={millify(coins.totalExchanges)}
             />
           </Col>
           <Col span={12} style={{ textAlign: "center" }}>
             <Statistic
               title="Total Market Cap"
-              value={millify(globalStats.totalMarketCap)}
+              value={millify(coins.totalMarketCap)}
             />
           </Col>
           <Col span={12} style={{ textAlign: "center" }}>
             <Statistic
               title="Total 24h Volume"
-              value={millify(globalStats.total24hVolume)}
+              value={millify(coins.total24hVolume)}
             />
           </Col>
           <Col span={12} style={{ textAlign: "center" }}>
             <Statistic
               title="Total Markets"
-              value={millify(globalStats.totalMarkets)}
+              value={millify(coins.totalMarkets)}
             />
           </Col>
           <Col span={12} style={{ textAlign: "center" }}>
             <Statistic
               title="Bitcoin Dominance"
-              value={millify(globalStats.btcDominance)}
+              value={millify(coins.btcDominance)}
             />
           </Col>
         </Row>
@@ -99,7 +83,7 @@ const Home = () => {
             Best Coins
           </Title>
           <div style={{ display: "flex", justifyContent: "space-around" }}>
-            {globalStats.bestCoins?.map((index) => {
+            {coins.bestCoins?.map((index) => {
               return (
                 <Coin
                   key={index.uuid}
@@ -117,7 +101,7 @@ const Home = () => {
             Newest Coins
           </Title>
           <div style={{ display: "flex", justifyContent: "space-around" }}>
-            {globalStats.newestCoins?.map((index) => {
+            {coins.newestCoins?.map((index) => {
               return (
                 <Coin
                   key={index.uuid}
