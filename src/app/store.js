@@ -2,7 +2,7 @@
 //
 // import { cryptoApi } from "./services/cryptoApi";
 //
-// export constUtils store = configureStore({
+// export utils store = configureStore({
 //   reducer: {
 //     [cryptoApi.reducerPath]: cryptoApi.reducer,
 //   },

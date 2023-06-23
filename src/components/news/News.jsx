@@ -4,13 +4,13 @@ import { Avatar, Card, Col, Row, Typography } from "antd";
 import styles from "./News.module.css";
 import moment from "moment";
 import { url, params, headers } from "./consts";
-import constUtils from "../../constUtils";
+import utils from "../../utils";
 
 const { Title, Text } = Typography;
 
 const demoImage =
   "https://s2.coinmarketcap.com/static/img/coins/200x200/1975.png";
-const optionsNews = constUtils(url, params, headers);
+const optionsNews = utils(url, params, headers);
 const News = () => {
   const [news, setNews] = useState([]);
 

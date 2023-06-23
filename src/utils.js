@@ -1,4 +1,4 @@
-function constUtils(url, params, headers) {
+function utils(url, params, headers) {
   return {
     method: "GET",
     url: url,
@@ -7,4 +7,4 @@ function constUtils(url, params, headers) {
   };
 }
 
-export default constUtils;
+export default utils;

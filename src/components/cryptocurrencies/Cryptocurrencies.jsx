@@ -7,11 +7,11 @@ import millify from "millify";
 import styles from "./Cryptocur.module.css";
 import { url, params, headers } from "./consts";
 
-import constUtils from "../../constUtils";
+import utils from "../../utils";
 
 const { Title } = Typography;
 
-const optionsCoins = constUtils(url, params, headers);
+const optionsCoins = utils(url, params, headers);
 const Cryptocurrencies = () => {
   const [cryptos, setCryptos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");

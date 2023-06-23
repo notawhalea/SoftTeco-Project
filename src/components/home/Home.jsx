@@ -6,11 +6,11 @@ import styles from "./Home.module.css";
 import axios from "axios";
 
 import { url, params, headers } from "./consts";
-import constUtils from "../../constUtils";
+import utils from "../../utils";
 
 const { Title } = Typography;
 
-const options = constUtils(url, params, headers);
+const options = utils(url, params, headers);
 
 const Home = () => {
   const [coins, setCoins] = useState([]);
