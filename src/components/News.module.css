@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+.mainEl {
+    margin-top: 2%;
+    margin-left: 8%;
+    margin-right: 9%;
+}
+.newsCard{
+    min-height: 300px !important;
+}
+.newsImageContainer{
+    display: flex !important;
+    justify-content: space-between !important;
+}
+.newsTitle{
+    width: 100%;
+}
+
+.newsImageContainer .img{
+    width:100px;
+    height:100px;
+}
+.newsCard p{
+    color: black;
+    margin: 10px 0px !important;
+}
+.providerContainer{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3%;
+}
+.providerName{
+    margin-left: 10px;
+}
+.parDescription {
+    color: gray !important;
+    padding-left: 3%;
+}

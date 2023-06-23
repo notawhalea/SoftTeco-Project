@@ -5,21 +5,29 @@
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
 }
-.crypto-card-container{
+.cryptoCardContainer{
     min-height: 65vh !important;
-    margin-top: 2% !important;
     padding-left: 9%;
     padding-right: 10%;
 }
-.crypto-card{
+.cryptoCard{
     min-width: 250px;
 }
-.crypto-card .crypto-image{
-    width:35px;
+.searchCrypto {
+    padding-bottom: 2%;
+    margin-left: 9%;
+    margin-right: 10%;
 }
-.title-first {
+.cryptoCard .cryptoImage{
+    width:100%;
+}
+/* .cryptoImage { */
+/*     display: flex; */
+/* } */
+.titleFirst {
     font-weight: bold;
 }
-.title-next {
+.titleNext {
     font-weight: normal;
+    color: gray;
 }

@@ -3,7 +3,8 @@ import { Typography, Row, Col, Card, Input } from "antd";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import millify from "millify";
-import "./Cryptocur.module.css";
+
+import styles from "./Cryptocur.module.css";
 
 const { Title } = Typography;
 
@@ -38,47 +39,48 @@ const Cryptocurrencies = () => {
     };
     fetchData();
   }, [cryptos, searchTerm]);
-  console.log("resp", cryptos);
   return (
-    <div style={{ marginTop: "1%", marginLeft: "8%", marginRight: "9%" }}>
+    <div style={{ marginTop: "1%" }}>
       <Title level={1} style={{ marginLeft: "33%" }}>
         Top 50 World Cryptocurrencies
       </Title>
-      <div className="search-crypto" style={{ paddingBottom: "2%" }}>
+      <div className={styles.searchCrypto}>
         <Input
           placeholder="Search Cryptocurrency"
           onChange={(e) => setSearchTerm(e.target.value)}
           size="large"
         />
       </div>
-      <Row gutter={[32, 32]} className="crypto-card-container">
+      <Row gutter={[36, 36]} className={styles.cryptoCardContainer}>
         {cryptos.map((currency) => (
           <Col
             xs={24}
             sm={12}
-            lg={4}
-            className="crypto-card"
+            lg={6}
+            className={styles.cryptoCard}
             key={currency.uuid}
           >
             <Link to={`/crypto/${currency.name}`}>
               <Card
-                extra={
+                cover={
                   <img
-                    className="crypto-image"
+                    className={styles.cryptoImage}
                     src={currency.iconUrl}
                     alt="crypto-image"
                   />
                 }
                 hoverable
               >
-                <p className="title-first">{`${currency.rank}. ${currency.name}`}</p>
-                <p className="title-next" style={{ color: "gray" }}>
+                <p
+                  className={styles.titleFirst}
+                >{`${currency.rank}. ${currency.name}`}</p>
+                <p className={styles.titleNext}>
                   Price: {millify(currency.price)}
                 </p>
-                <p className="title-next" style={{ color: "gray" }}>
+                <p className={styles.titleNext}>
                   Market Cap: {millify(currency.marketCap)}
                 </p>
-                <p className="title-next" style={{ color: "gray" }}>
+                <p className={styles.titleNext}>
                   Daily Change: {millify(currency.change)}%
                 </p>
               </Card>

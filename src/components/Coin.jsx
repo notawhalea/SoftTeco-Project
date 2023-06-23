@@ -5,7 +5,7 @@ const Coin = ({ iconUrl, symbol, name, coinrankingUrl }) => {
     <div className={style.mainEl}>
       <img src={iconUrl} alt={symbol} />
       <h3>{name}</h3>
-      <a href={coinrankingUrl} className={style.linkEl} style={{}}>
+      <a href={coinrankingUrl} className={style.linkEl} target="_blank">
         Read more
       </a>
     </div>
