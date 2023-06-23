@@ -1,4 +1,4 @@
-function utils(url, params, headers) {
+export function getApiOptions(url, params, headers) {
   return {
     method: "GET",
     url: url,
@@ -6,5 +6,3 @@ function utils(url, params, headers) {
     headers: headers,
   };
 }
-
-export default utils;
