@@ -3,6 +3,8 @@ import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import { Col, Row, Typography } from "antd";
 
+import styles from "./LineChart.module.css";
+
 const { Title } = Typography;
 
 const LineChart = ({ coinHistory, currentPrice, coinName }) => {
@@ -47,18 +49,20 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
 
   return (
     <>
-      <Row className="chart-header">
-        <Title level={2} className="chart-title">
-          {coinName} Price Chart{" "}
-        </Title>
-        <Col className="price-container">
-          <Title level={5} className="price-change">
-            Change: {coinHistory?.change}%
-          </Title>
-          <Title level={5} className="current-price">
-            Current {coinName} Price: $ {currentPrice}
-          </Title>
-        </Col>
+      <Row>
+        <div className={styles.priceChart}>
+          <h1>{coinName} Price Chart</h1>
+        </div>
+        <div className={styles.chartContainer}>
+          <div>
+            <Title level={5}>Change: {coinHistory?.change}%</Title>
+          </div>
+          <div>
+            <Title level={5}>
+              Current {coinName} Price: $ {currentPrice}
+            </Title>
+          </div>
+        </div>
       </Row>
       <Line data={data} options={options} />
     </>

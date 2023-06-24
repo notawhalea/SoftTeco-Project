@@ -53,22 +53,22 @@ const CryptoDetails = () => {
   }, []);
   console.log("resp", cryptos);
 
-  const [timePeriods, setTimePeriods] = useState();
+  const [timePeriods, setTimePeriods] = useState("7d");
   const [coinHistory, setCoinHistory] = useState();
-  const optionsCoinCharts = {
-    method: "GET",
-    url: `https://coinranking1.p.rapidapi.com/coin/${coinId}/history?timeperiod=${timePeriods}`,
-    params: {
-      referenceCurrencyUuid: "yhjMzLPhuIDl",
-      timePeriod: "3m",
-    },
-    headers: {
-      "X-RapidAPI-Key": "eb71184572msh8f332283060f7cbp1f341fjsnc4685458b6c2",
-      "X-RapidAPI-Host": "coinranking1.p.rapidapi.com",
-    },
-  };
 
   useEffect(() => {
+    const optionsCoinCharts = {
+      method: "GET",
+      url: `https://coinranking1.p.rapidapi.com/coin/${coinId}/history?timeperiod=${timePeriods}`,
+      params: {
+        referenceCurrencyUuid: "yhjMzLPhuIDl",
+        timePeriod: `${timePeriods}`,
+      },
+      headers: {
+        "X-RapidAPI-Key": "eb71184572msh8f332283060f7cbp1f341fjsnc4685458b6c2",
+        "X-RapidAPI-Host": "coinranking1.p.rapidapi.com",
+      },
+    };
     const fetchData = async () => {
       const apiReturn = await axios
         .request(optionsCoinCharts)
@@ -80,7 +80,7 @@ const CryptoDetails = () => {
         });
     };
     fetchData();
-  }, [setTimePeriods]);
+  }, [timePeriods, setTimePeriods]);
   console.log("hist", coinHistory);
 
   const time = ["3h", "24h", "7d", "30d", "1y", "3m", "3y", "5y"];
