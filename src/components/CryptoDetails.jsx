@@ -16,6 +16,8 @@ import {
 } from "@ant-design/icons";
 import axios from "axios";
 
+import styles from "./CryptoDetails.module.css";
+
 const { Title, Text } = Typography;
 const { Option } = Select;
 
@@ -63,8 +65,10 @@ const CryptoDetails = () => {
     },
     { title: "Rank", value: cryptos?.rank, icon: <NumberOutlined /> },
     {
-      title: "24h Volume",
-      value: `$ ${cryptos?.volume && millify(cryptos?.volume)}`,
+      title: "Number of exchanges",
+      value: `${
+        cryptos?.numberOfExchanges && millify(cryptos?.numberOfExchanges)
+      }`,
       icon: <ThunderboltOutlined />,
     },
     {
@@ -100,17 +104,99 @@ const CryptoDetails = () => {
     {
       title: "Total Supply",
       value: `$ ${cryptos?.supply?.total && millify(cryptos?.supply?.total)}`,
-      icon: <ExclamationCircleOutlined />,
+      icon: <DollarCircleOutlined />,
     },
     {
       title: "Circulating Supply",
       value: `$ ${
         cryptos?.supply?.circulating && millify(cryptos?.supply?.circulating)
       }`,
-      icon: <ExclamationCircleOutlined />,
+      icon: <DollarCircleOutlined />,
     },
   ];
-  return <div>CryptoDetails {coinId}</div>;
+
+  return (
+    <Col className={styles.coinDetailContainer}>
+      <Col className={styles.coinHeadingContainer}>
+        <Title level={2} className={styles.coinName}>
+          {cryptos.name} ({cryptos.symbol}) Price
+        </Title>
+        <p>
+          {cryptos.name} live price in US dollars. View value statistics, market
+          cap and supply.
+        </p>
+        <Select
+          defaultValue="7d"
+          className={styles.selectTimeperiod}
+          placeholder="Select Time Period"
+          onChange={(value) => setTimePeriod(value)}
+        >
+          {time.map((date) => (
+            <Option key={date}>{date}</Option>
+          ))}
+        </Select>
+        <Col className={styles.statsContainer}>
+          <Col className={styles.coinValueStatistics}>
+            <Col className={styles.coinValueStatisticsHeading}>
+              <Title level={3} className={styles.coinDetailsHeading}>
+                {cryptos.name} Value Statistics
+              </Title>
+              <p>
+                An overview showing the statistics of {cryptos.name}, such as
+                the base and quote currency, the rank, and trading volume.
+              </p>
+            </Col>
+            {stats.map(({ icon, title, value }) => (
+              <Col className={styles.coinStats}>
+                <Col className={styles.coinStatsName}>
+                  <Text>{icon}</Text>
+                  <Text>{title}</Text>
+                </Col>
+                <Text className={styles.stats}>{value}</Text>
+              </Col>
+            ))}
+          </Col>
+          <Col className={styles.otherStatsInfo}>
+            <Col className={styles.coinValueStatisticsHeading}>
+              <Title level={3} className={styles.coinDetailsHeading}>
+                Other Statistics
+              </Title>
+              <p>
+                An overview showing the other stats of {cryptos.name}, such as
+                number of markets, total supply, and number of exchanges.
+              </p>
+            </Col>
+            {genericStats.map(({ icon, title, value }) => (
+              <Col className={styles.coinStats}>
+                <Col className={styles.coinStatsName}>
+                  <Text>{icon}</Text>
+                  <Text>{title}</Text>
+                </Col>
+                <Text className={styles.stats}>{value}</Text>
+              </Col>
+            ))}
+          </Col>
+        </Col>
+        <Col className={styles.coinDescLink}>
+          <Col className={styles.coinLinks}>
+            <Title level={3} className={styles.coinDetailsHeading}>
+              {cryptos.name} Links
+            </Title>
+            {cryptos.links?.map((link) => (
+              <Row className={styles.coinLink} key={link.name}>
+                <Title level={5} className={styles.linkName}>
+                  {link.type}
+                </Title>
+                <a href={link.url} target="_blank" rel="noreferrer">
+                  {link.name}
+                </a>
+              </Row>
+            ))}
+          </Col>
+        </Col>
+      </Col>
+    </Col>
+  );
 };
 
 export default CryptoDetails;
