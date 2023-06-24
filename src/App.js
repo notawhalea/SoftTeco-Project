@@ -6,7 +6,7 @@ import News from "./components/news/News";
 import NotFound from "./components/NotFound";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./components/home/Home";
-import CryptoDetails from "./components/CryptoDetails";
+import CryptoDetails from "./components/cryptodetails/CryptoDetails";
 
 const App = () => {
   return (

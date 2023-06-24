@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import HTMLReactParser from "html-react-parser";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import millify from "millify";
-import { Col, Row, Typography, Select } from "antd";
+import { Col, Row, Typography, Select, Card } from "antd";
 import {
   MoneyCollectOutlined,
   DollarCircleOutlined,
@@ -17,15 +17,15 @@ import {
 import axios from "axios";
 
 import styles from "./CryptoDetails.module.css";
+import LineChart from "../LineChart";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
 
 const CryptoDetails = () => {
-  const [cryptos, setCryptos] = useState([]);
   const { coinId } = useParams();
-
-  const optionsCoins = {
+  const [cryptos, setCryptos] = useState([]);
+  const optionsCoinDetails = {
     method: "GET",
     url: `https://coinranking1.p.rapidapi.com/coin/${coinId}`,
     params: {
@@ -41,7 +41,7 @@ const CryptoDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       const apiReturn = await axios
-        .request(optionsCoins)
+        .request(optionsCoinDetails)
         .then(function (response) {
           setCryptos(response.data?.data?.coin);
         })
@@ -53,7 +53,35 @@ const CryptoDetails = () => {
   }, []);
   console.log("resp", cryptos);
 
-  const [timePeriod, setTimePeriod] = useState("7d");
+  const [timePeriods, setTimePeriods] = useState();
+  const [coinHistory, setCoinHistory] = useState();
+  const optionsCoinCharts = {
+    method: "GET",
+    url: `https://coinranking1.p.rapidapi.com/coin/${coinId}/history?timeperiod=${timePeriods}`,
+    params: {
+      referenceCurrencyUuid: "yhjMzLPhuIDl",
+      timePeriod: "3m",
+    },
+    headers: {
+      "X-RapidAPI-Key": "eb71184572msh8f332283060f7cbp1f341fjsnc4685458b6c2",
+      "X-RapidAPI-Host": "coinranking1.p.rapidapi.com",
+    },
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const apiReturn = await axios
+        .request(optionsCoinCharts)
+        .then(function (response) {
+          setCoinHistory(response?.data?.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    };
+    fetchData();
+  }, [setTimePeriods]);
+  console.log("hist", coinHistory);
 
   const time = ["3h", "24h", "7d", "30d", "1y", "3m", "3y", "5y"];
 
@@ -129,12 +157,18 @@ const CryptoDetails = () => {
           defaultValue="7d"
           className={styles.selectTimeperiod}
           placeholder="Select Time Period"
-          onChange={(value) => setTimePeriod(value)}
+          onChange={(value) => setTimePeriods(value)}
         >
           {time.map((date) => (
             <Option key={date}>{date}</Option>
           ))}
+          {console.log(timePeriods)}
         </Select>
+        <LineChart
+          coinHistory={coinHistory}
+          currentPrice={millify(cryptos?.price)}
+          coinName={cryptos?.name}
+        />
         <Col className={styles.statsContainer}>
           <Col className={styles.coinValueStatistics}>
             <Col className={styles.coinValueStatisticsHeading}>
@@ -177,23 +211,27 @@ const CryptoDetails = () => {
             ))}
           </Col>
         </Col>
-        <Col className={styles.coinDescLink}>
-          <Col className={styles.coinLinks}>
+        <div className={styles.coinDescLink}>
+          <div>
             <Title level={3} className={styles.coinDetailsHeading}>
               {cryptos.name} Links
             </Title>
-            {cryptos.links?.map((link) => (
-              <Row className={styles.coinLink} key={link.name}>
-                <Title level={5} className={styles.linkName}>
-                  {link.type}
-                </Title>
-                <a href={link.url} target="_blank" rel="noreferrer">
-                  {link.name}
-                </a>
-              </Row>
-            ))}
-          </Col>
-        </Col>
+            <Row gutter={[24, 24]} className={styles.coinLink}>
+              {cryptos.links?.map((link) => (
+                <Col xs={24} sm={12} lg={6}>
+                  <Card>
+                    <Title level={5} className={styles.linkName}>
+                      {link.type}
+                    </Title>
+                    <a href={link.url} target="_blank" rel="noreferrer">
+                      {link.name}
+                    </a>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+          </div>
+        </div>
       </Col>
     </Col>
   );
