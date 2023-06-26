@@ -1,0 +1,172 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+:root{
+    --text-primary:#000;
+    --bgPrimary:#fff;
+    --bgSecondary: #F9F9F9;
+    --pink: #0071bd;
+    --light-blue: #e6f7ff;
+    --border: #d9d9d9;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.coinDetailContainer{
+    margin-left: 9%;
+    margin-right: 10%;
+}
+
+.coinHeadingContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    gap: 10px;
+}
+
+.coinHeadingContainer .coinName{
+    font-weight: 900;
+    color: var(--pink);
+}
+
+.coinHeadingContainer p{
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 1%;
+}
+
+.statsContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+
+.statsContainer h2{
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-top: 20px;
+    color: var(--pink);
+}
+
+.coinDetailsHeading{
+    font-weight: 700 !important;
+    margin-top: 20px !important;
+    color: var(--pink) !important;
+}
+
+.coinStats{
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    opacity: 0.9;
+    padding: 20px;
+}
+
+.coinStatsName{
+    display: flex;
+    gap: 10px;
+    font-size: 1rem;
+}
+
+.stats{
+    font-weight: 800;
+}
+
+.coinValueStatisticsHeading p{
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.coinValueStatistics {
+    width: 50%;
+}
+
+.otherStatsInfo {
+    width: 50%;
+}
+
+.coinDescLink{
+    display: flex;
+    margin-top: 1%;
+    justify-content: center;
+    width: 100%;
+}
+
+.coinDescLink h2{
+    font-weight: 700;
+    color: var(--pink);
+}
+
+.coinDescLink a{
+    color: var(--pink);
+}
+
+.coinDescLink h3{
+    font-weight: 700;
+}
+
+.coinDesc{
+    flex: 0.5;
+}
+
+
+.coinLink{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.linkName{
+    text-transform: capitalize;
+    font-size: 1rem;
+}
+
+.selectTimeperiod{
+    width: 40% !important;
+    margin-top: 0 !important;
+}
+
+.coinLink a{
+    color: var(--pink);
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.coinLink:hover, .coinStats:hover{
+    background-color: var(--bgSecondary);
+}
+
+@media screen and (max-width:1000px){
+    .statsContainer{
+        flex-direction: column;
+    }
+    .coinDescLink{
+        flex-direction: column;
+    }
+    .statsContainer h2{
+        margin-top: 0px;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .coinLinks{
+        padding: 0px;
+    }
+    .coinDetailContainer{
+        margin: 0;
+    }
+}
+@media screen and (max-width: 500px){
+    .heading{
+        margin-top: 20px;
+    }
+}
