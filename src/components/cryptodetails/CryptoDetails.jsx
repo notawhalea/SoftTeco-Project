@@ -18,7 +18,14 @@ import axios from "axios";
 import styles from "./CryptoDetails.module.css";
 import LineChart from "../LineChart";
 import { getApiOptions } from "../../utils";
-import { url, paramsCoinDetails, headers } from "./consts";
+import {
+  url,
+  paramsCoinDetails,
+  headers,
+  time,
+  createStats,
+  createGenericStats,
+} from "./consts";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -48,7 +55,7 @@ const CryptoDetails = () => {
 
   const [timePeriods, setTimePeriods] = useState("7d");
   const [coinHistory, setCoinHistory] = useState();
-  //TODO вот так лучше думаю
+
   useEffect(() => {
     const optionsCoinCharts = getApiOptions(
       url + `/${coinId}/history?timeperiod=${timePeriods}`,
@@ -72,65 +79,8 @@ const CryptoDetails = () => {
     fetchCoinCharts();
   }, [timePeriods, setTimePeriods]);
 
-  const time = ["7d", "30d", "1y", "3m", "3y", "5y"];
-  //TODO вообще это все можно в одну функцию загонять но тогда будет 10 вызовов с разными парамсами, хз лучше ли это
-  const stats = [
-    {
-      title: "Price to USD",
-      value: `$ ${cryptos?.price && millify(cryptos?.price)}`,
-      icon: <DollarCircleOutlined />,
-    },
-    { title: "Rank", value: cryptos?.rank, icon: <NumberOutlined /> },
-    {
-      title: "Number of exchanges",
-      value: `${
-        cryptos?.numberOfExchanges && millify(cryptos?.numberOfExchanges)
-      }`,
-      icon: <ThunderboltOutlined />,
-    },
-    {
-      title: "Market Cap",
-      value: `$ ${cryptos?.marketCap && millify(cryptos?.marketCap)}`,
-      icon: <DollarCircleOutlined />,
-    },
-    {
-      title: "All-time-high(daily avg.)",
-      value: `$ ${
-        cryptos?.allTimeHigh?.price && millify(cryptos?.allTimeHigh?.price)
-      }`,
-      icon: <TrophyOutlined />,
-    },
-  ];
-
-  const genericStats = [
-    {
-      title: "Number Of Markets",
-      value: cryptos?.numberOfMarkets,
-      icon: <FundOutlined />,
-    },
-    {
-      title: "Number Of Exchanges",
-      value: cryptos?.numberOfExchanges,
-      icon: <MoneyCollectOutlined />,
-    },
-    {
-      title: "Aprroved Supply",
-      value: cryptos?.supply?.confirmed ? <CheckOutlined /> : <StopOutlined />,
-      icon: <ExclamationCircleOutlined />,
-    },
-    {
-      title: "Total Supply",
-      value: `$ ${cryptos?.supply?.total && millify(cryptos?.supply?.total)}`,
-      icon: <DollarCircleOutlined />,
-    },
-    {
-      title: "Circulating Supply",
-      value: `$ ${
-        cryptos?.supply?.circulating && millify(cryptos?.supply?.circulating)
-      }`,
-      icon: <DollarCircleOutlined />,
-    },
-  ];
+  const stats = createStats(cryptos);
+  const genericStats = createGenericStats(cryptos);
 
   return (
     <Col className={styles.coinDetailContainer}>
