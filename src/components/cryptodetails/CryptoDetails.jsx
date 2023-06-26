@@ -26,13 +26,14 @@ const { Option } = Select;
 const CryptoDetails = () => {
   const { coinId } = useParams();
   const [cryptos, setCryptos] = useState([]);
-  const optionsCoinDetails = getApiOptions(
-    url + `/${coinId}`,
-    paramsCoinDetails,
-    headers
-  );
+
   useEffect(() => {
-    const fetchData = async () => {
+    const optionsCoinDetails = getApiOptions(
+      url + `/${coinId}`,
+      paramsCoinDetails,
+      headers
+    );
+    const fetchCoinDetails = async () => {
       const apiReturn = await axios
         .request(optionsCoinDetails)
         .then(function (response) {
@@ -42,7 +43,7 @@ const CryptoDetails = () => {
           console.log(error);
         });
     };
-    fetchData();
+    fetchCoinDetails();
   }, []);
 
   const [timePeriods, setTimePeriods] = useState("7d");
@@ -58,7 +59,7 @@ const CryptoDetails = () => {
       headers
     );
 
-    const fetchData = async () => {
+    const fetchCoinCharts = async () => {
       const apiReturn = await axios
         .request(optionsCoinCharts)
         .then(function (response) {
@@ -68,7 +69,7 @@ const CryptoDetails = () => {
           console.log(error);
         });
     };
-    fetchData();
+    fetchCoinCharts();
   }, [timePeriods, setTimePeriods]);
 
   const time = ["7d", "30d", "1y", "3m", "3y", "5y"];
