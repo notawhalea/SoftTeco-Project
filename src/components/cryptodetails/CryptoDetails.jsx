@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import HTMLReactParser from "html-react-parser";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import millify from "millify";
 import { Col, Row, Typography, Select, Card } from "antd";
 import {
@@ -18,6 +17,8 @@ import axios from "axios";
 
 import styles from "./CryptoDetails.module.css";
 import LineChart from "../LineChart";
+import { getApiOptions } from "../../utils";
+import { url, paramsCoinDetails, headers, paramsCoinCharts } from "./consts";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -25,19 +26,11 @@ const { Option } = Select;
 const CryptoDetails = () => {
   const { coinId } = useParams();
   const [cryptos, setCryptos] = useState([]);
-  const optionsCoinDetails = {
-    method: "GET",
-    url: `https://coinranking1.p.rapidapi.com/coin/${coinId}`,
-    params: {
-      referenceCurrencyUuid: "yhjMzLPhuIDl",
-      timePeriod: "24h",
-    },
-    headers: {
-      "X-RapidAPI-Key": "eb71184572msh8f332283060f7cbp1f341fjsnc4685458b6c2",
-      "X-RapidAPI-Host": "coinranking1.p.rapidapi.com",
-    },
-  };
-
+  const optionsCoinDetails = getApiOptions(
+    url + `/${coinId}`,
+    paramsCoinDetails,
+    headers
+  );
   useEffect(() => {
     const fetchData = async () => {
       const apiReturn = await axios
@@ -51,12 +44,18 @@ const CryptoDetails = () => {
     };
     fetchData();
   }, []);
-  console.log("resp", cryptos);
 
   const [timePeriods, setTimePeriods] = useState("7d");
   const [coinHistory, setCoinHistory] = useState();
 
   useEffect(() => {
+    // const optionsCoinCharts = getApiOptions(
+    //   url + `/${coinId}/history?timeperiod=${timePeriods}`,
+    //   ((paramsCoinDetails.timePeriod = `${timePeriods}`),
+    //   (paramsCoinDetails.referenceCurrencyUuid = "yhjMzLPhuIDl")),
+    //   headers
+    // );
+    //TODO не работает короче пока подумаю что делать с этим, как и с статсами
     const optionsCoinCharts = {
       method: "GET",
       url: `https://coinranking1.p.rapidapi.com/coin/${coinId}/history?timeperiod=${timePeriods}`,
@@ -83,7 +82,7 @@ const CryptoDetails = () => {
   }, [timePeriods, setTimePeriods]);
   console.log("hist", coinHistory);
 
-  const time = ["3h", "24h", "7d", "30d", "1y", "3m", "3y", "5y"];
+  const time = ["7d", "30d", "1y", "3m", "3y", "5y"];
 
   const stats = [
     {
