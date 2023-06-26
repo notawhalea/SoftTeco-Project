@@ -18,7 +18,7 @@ import axios from "axios";
 import styles from "./CryptoDetails.module.css";
 import LineChart from "../LineChart";
 import { getApiOptions } from "../../utils";
-import { url, paramsCoinDetails, headers, paramsCoinCharts } from "./consts";
+import { url, paramsCoinDetails, headers } from "./consts";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -47,27 +47,17 @@ const CryptoDetails = () => {
 
   const [timePeriods, setTimePeriods] = useState("7d");
   const [coinHistory, setCoinHistory] = useState();
-
+  //TODO вот так лучше думаю
   useEffect(() => {
-    // const optionsCoinCharts = getApiOptions(
-    //   url + `/${coinId}/history?timeperiod=${timePeriods}`,
-    //   ((paramsCoinDetails.timePeriod = `${timePeriods}`),
-    //   (paramsCoinDetails.referenceCurrencyUuid = "yhjMzLPhuIDl")),
-    //   headers
-    // );
-    //TODO не работает короче пока подумаю что делать с этим, как и с статсами
-    const optionsCoinCharts = {
-      method: "GET",
-      url: `https://coinranking1.p.rapidapi.com/coin/${coinId}/history?timeperiod=${timePeriods}`,
-      params: {
+    const optionsCoinCharts = getApiOptions(
+      url + `/${coinId}/history?timeperiod=${timePeriods}`,
+      {
         referenceCurrencyUuid: "yhjMzLPhuIDl",
         timePeriod: `${timePeriods}`,
       },
-      headers: {
-        "X-RapidAPI-Key": "eb71184572msh8f332283060f7cbp1f341fjsnc4685458b6c2",
-        "X-RapidAPI-Host": "coinranking1.p.rapidapi.com",
-      },
-    };
+      headers
+    );
+
     const fetchData = async () => {
       const apiReturn = await axios
         .request(optionsCoinCharts)
@@ -80,10 +70,9 @@ const CryptoDetails = () => {
     };
     fetchData();
   }, [timePeriods, setTimePeriods]);
-  console.log("hist", coinHistory);
 
   const time = ["7d", "30d", "1y", "3m", "3y", "5y"];
-
+  //TODO вообще это все можно в одну функцию загонять но тогда будет 10 вызовов с разными парамсами, хз лучше ли это
   const stats = [
     {
       title: "Price to USD",
@@ -179,8 +168,8 @@ const CryptoDetails = () => {
                 the base and quote currency, the rank, and trading volume.
               </p>
             </Col>
-            {stats.map(({ icon, title, value }) => (
-              <Col className={styles.coinStats}>
+            {stats.map(({ icon, title, value }, index) => (
+              <Col className={styles.coinStats} key={index}>
                 <Col className={styles.coinStatsName}>
                   <Text>{icon}</Text>
                   <Text>{title}</Text>
@@ -199,8 +188,8 @@ const CryptoDetails = () => {
                 number of markets, total supply, and number of exchanges.
               </p>
             </Col>
-            {genericStats.map(({ icon, title, value }) => (
-              <Col className={styles.coinStats}>
+            {genericStats.map(({ icon, title, value }, index) => (
+              <Col className={styles.coinStats} key={index}>
                 <Col className={styles.coinStatsName}>
                   <Text>{icon}</Text>
                   <Text>{title}</Text>
@@ -216,8 +205,8 @@ const CryptoDetails = () => {
               {cryptos.name} Links
             </Title>
             <Row gutter={[24, 24]} className={styles.coinLink}>
-              {cryptos.links?.map((link) => (
-                <Col xs={24} sm={12} lg={6}>
+              {cryptos.links?.map((link, index) => (
+                <Col xs={24} sm={12} lg={6} key={index}>
                   <Card>
                     <Title level={5} className={styles.linkName}>
                       {link.type}
