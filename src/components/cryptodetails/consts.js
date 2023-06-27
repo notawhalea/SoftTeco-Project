@@ -60,7 +60,7 @@ export function createGenericStats(cryptos) {
       icon: <FundOutlined />,
     },
     {
-      title: "Number Of Exchanges",
+      title: "Number Of Nfts",
       value: cryptos?.numberOfExchanges,
       icon: <MoneyCollectOutlined />,
     },
