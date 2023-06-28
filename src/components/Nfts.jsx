@@ -1,5 +1,5 @@
 import React from "react";
-import { ethers, getDefaultProvider, utils } from "ethers";
+import { ethers } from "ethers";
 
 import Nft from "./Nft";
 import { useEffect, useState } from "react";
@@ -13,17 +13,12 @@ import {
   FormControl,
   FormLabel,
   Input,
-  FormHelperText,
   Alert,
   AlertIcon,
 } from "@chakra-ui/react";
-
-const ethersConfig = {
-  provider: getDefaultProvider("homestead"),
-};
-
+import { getApiOptions } from "../utils";
 const Nfts = () => {
-  const perPage = 9;
+  const perPage = 12;
   const [nfts, setNfts] = useState([]);
   const [showCount, setShowCount] = useState(perPage);
   const [address, setAddress] = useState(
@@ -32,24 +27,20 @@ const Nfts = () => {
   const [errorMessageText, setErrorMessageText] = useState("");
   const [startToken, setStartToken] = useState("");
 
-  //
-
   useEffect(() => {
     const baseURL = `https://eth-mainnet.alchemyapi.io/v2/yr1niw94mq2e44-Jjpcrv-RBCiJ1VG0I/getNFTsForCollection`;
     const withMetadata = true;
-    const perPage = 9;
     if (!ethers.isAddress(address) && address != "") {
       setErrorMessageText("Invalid address");
       setNfts(null);
     } else {
       if ((nfts == null || nfts.length < showCount) && address != "") {
-        const config = {
-          method: "get",
-          url: `${baseURL}?contractAddress=${address}&withMetadata=${withMetadata}&startToken=${startToken}`,
-          headers: {},
-          params: {},
-        };
-        axios(config)
+        const optionsNft = getApiOptions(
+          `${baseURL}?contractAddress=${address}&withMetadata=${withMetadata}&startToken=${startToken}`,
+          {},
+          {}
+        );
+        axios(optionsNft)
           .then((response) => {
             setErrorMessageText("");
             setNfts([...nfts, ...response.data.nfts]);
@@ -64,13 +55,8 @@ const Nfts = () => {
 
   return (
     <>
-      <Container maxWidth={1200}>
-        <Text
-          fontSize="4xl"
-          fontWeight="bold"
-          marginBottom="4"
-          textAlign="center"
-        >
+      <Container maxWidth={1290}>
+        <Text fontSize="4xl" fontWeight="bold" marginTop="2" textAlign="center">
           Nft Gallery
         </Text>
         <FormControl marginBottom={4}>
@@ -94,7 +80,7 @@ const Nfts = () => {
         ) : (
           <></>
         )}
-        <SimpleGrid columns={[2, null, 3]} gap={6}>
+        <SimpleGrid columns={[2, null, 4]} gap={6}>
           {nfts.length > 0
             ? nfts.slice(0, showCount).map((nft, key) => (
                 <GridItem key={key}>
