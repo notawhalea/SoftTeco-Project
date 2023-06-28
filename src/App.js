@@ -7,6 +7,7 @@ import NotFound from "./components/NotFound";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./components/home/Home";
 import CryptoDetails from "./components/cryptodetails/CryptoDetails";
+import RHForm from "./components/RHForm";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
             <Route path="/nfts" element={<Nfts />} />
             <Route path="/crypto/:coinId" element={<CryptoDetails />} />
             <Route path="/news" element={<News />} />
+            <Route path="/form" element={<RHForm />} />
           </Route>
         </Routes>
       </div>
