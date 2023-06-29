@@ -30,11 +30,11 @@ const Nfts = () => {
   useEffect(() => {
     const baseURL = `https://eth-mainnet.alchemyapi.io/v2/yr1niw94mq2e44-Jjpcrv-RBCiJ1VG0I/getNFTsForCollection`;
     const withMetadata = true;
-    if (!ethers.isAddress(address) && address != "") {
+    if (!ethers.isAddress(address) && address !== "") {
       setErrorMessageText("Invalid address");
       setNfts(null);
     } else {
-      if ((nfts == null || nfts.length < showCount) && address != "") {
+      if ((nfts == null || nfts.length < showCount) && address !== "") {
         const optionsNft = getApiOptions(
           `${baseURL}?contractAddress=${address}&withMetadata=${withMetadata}&startToken=${startToken}`,
           {},
@@ -81,18 +81,17 @@ const Nfts = () => {
           <></>
         )}
         <SimpleGrid columns={[2, null, 4]} gap={6}>
-          {nfts.length > 0
-            ? nfts.slice(0, showCount).map((nft, key) => (
-                <GridItem key={key}>
-                  <Nft
-                    title={nft.title}
-                    address={nft.contract.address}
-                    id={parseInt(nft.id.tokenId, 16)}
-                    image={nft.media[0].gateway}
-                  />
-                </GridItem>
-              ))
-            : null}
+          {nfts.length > 0 &&
+            nfts.slice(0, showCount).map((nft, id) => (
+              <GridItem key={id}>
+                <Nft
+                  title={nft.title}
+                  address={nft.contract.address}
+                  id={parseInt(nft.id.tokenId, 16)}
+                  image={nft.media[0].gateway}
+                />
+              </GridItem>
+            ))}
         </SimpleGrid>
       </Container>
       <Container marginTop="4" centerContent>
