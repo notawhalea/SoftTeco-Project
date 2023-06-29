@@ -12,8 +12,8 @@ const Footer = () => {
           <h3 className="logo">CryptØn</h3>
         </NavLink>
       </div>
-      <div>All rights reserved</div>
-      <div>
+      <div className={styles.allRightsReserved}>All rights reserved</div>
+      <div className={styles.createdBy}>
         Created by <a href="https://github.com/notawhalea">Nikita</a> &&
         <a href="https://github.com/AndrewZanko"> Andrey</a>
       </div>
