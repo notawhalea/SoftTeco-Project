@@ -34,7 +34,7 @@ const Nfts = () => {
       setErrorMessageText("Invalid address");
       setNfts(null);
     } else {
-      if ((nfts == null || nfts.length < showCount) && address !== "") {
+      if ((nfts === null || nfts.length < showCount) && address !== "") {
         const optionsNft = getApiOptions(
           `${baseURL}?contractAddress=${address}&withMetadata=${withMetadata}&startToken=${startToken}`,
           {},
@@ -72,13 +72,11 @@ const Nfts = () => {
             }}
           />
         </FormControl>
-        {errorMessageText ? (
+        {errorMessageText && (
           <Alert show={errorMessageText} status="error">
             <AlertIcon />
             {errorMessageText}
           </Alert>
-        ) : (
-          <></>
         )}
         <SimpleGrid columns={[2, null, 4]} gap={6}>
           {nfts.length > 0 &&
