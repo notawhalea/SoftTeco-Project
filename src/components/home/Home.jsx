@@ -43,7 +43,7 @@ const Home = () => {
           </Col>
           <Col span={12} style={{ textAlign: "center" }}>
             <Statistic
-              title="Total Exchanges"
+              title="Total Nfts"
               value={millify(coins.totalExchanges)}
             />
           </Col>

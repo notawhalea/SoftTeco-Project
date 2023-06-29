@@ -35,8 +35,8 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/exchanges" style={{ color: "black" }}>
-              Exchanges
+            <Link to="/nfts" style={{ color: "black" }}>
+              Nfts
             </Link>
           </li>
           <li>
