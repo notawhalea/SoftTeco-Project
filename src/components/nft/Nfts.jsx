@@ -1,7 +1,5 @@
 import React from "react";
 import { ethers } from "ethers";
-
-import Nft from "./Nft";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import {
@@ -16,7 +14,10 @@ import {
   Alert,
   AlertIcon,
 } from "@chakra-ui/react";
-import { getApiOptions } from "../utils";
+
+import Nft from "./Nft";
+import { getApiOptions } from "../../utils";
+import styles from "./Nfts.module.css";
 const Nfts = () => {
   const perPage = 12;
   const [nfts, setNfts] = useState([]);
@@ -55,7 +56,7 @@ const Nfts = () => {
 
   return (
     <>
-      <Container maxWidth={1290}>
+      <Container maxWidth={1290} width={"90%"}>
         <Text fontSize="4xl" fontWeight="bold" marginTop="2" textAlign="center">
           Nft Gallery
         </Text>

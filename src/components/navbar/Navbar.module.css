@@ -61,21 +61,28 @@ button {
     font-size: 20px;
     background: none;
 }
+.navLinksMobile {
+    display: none;
+}
 @media (max-width: 898px) {
     .currLogo {
         display: flex;
         position: absolute;
-        top: 2%;
+        top: 0.8rem;
         left: 28px;
     }
     .logo {
         display: flex;
         position: absolute;
-        top: 2%;
+        top: 0.8rem;
         left: 58px;
+        color: black !important;
     }
     .navLinks {
         display: none;
+    }
+    a {
+        color: white !important;
     }
     .navLinksMobile {
         position: absolute;
@@ -83,10 +90,10 @@ button {
         list-style: none;
         box-shadow: rgba(50, 50, 93, 0.23) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
         left: 0;
-        top: 10%;
+        top: 4rem;
         transition: all 0.5s ease-in-out;
         width: 100%;
-        background-color: white;
+        background-color: black;
     }
     ul li {
         padding: 32px;

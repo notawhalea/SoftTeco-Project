@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import millify from "millify";
 import { Typography, Row, Col, Statistic } from "antd";
-import Coin from "../Coin";
+import Coin from "../coin/Coin";
 import styles from "./Home.module.css";
 import axios from "axios";
 
@@ -30,9 +30,7 @@ const Home = () => {
   }, []);
   return (
     <div className={styles.homeEl}>
-      <Title level={1} className={styles.heading}>
-        Global Crypto Stats
-      </Title>
+      <p className={styles.heading}>Global Crypto Stats</p>
       <div>
         <Row gutter={[24, 24]}>
           <Col span={12} style={{ textAlign: "center" }}>
@@ -75,14 +73,10 @@ const Home = () => {
       </div>
 
       <div>
-        <Title level={1} className={styles.chartTitle}>
-          Chart of the Week
-        </Title>
+        <p className={styles.heading}>Chart of the Week</p>
         <div>
-          <Title level={2} className={styles.homeTitleBest}>
-            Best Coins
-          </Title>
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
+          <p className={styles.underHeadingTitle}>Best Coins</p>
+          <div className={styles.underHeading}>
             {coins.bestCoins?.map((index) => {
               return (
                 <Coin
@@ -97,10 +91,8 @@ const Home = () => {
           </div>
         </div>
         <div>
-          <Title level={2} className={styles.homeTitleNewest}>
-            Newest Coins
-          </Title>
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
+          <p className={styles.underHeadingTitle}>Newest Coins</p>
+          <div className={styles.underHeading}>
             {coins.newestCoins?.map((index) => {
               return (
                 <Coin

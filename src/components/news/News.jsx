@@ -29,9 +29,7 @@ const News = () => {
   }, []);
   return (
     <div className={styles.mainEl}>
-      <Title level={1} style={{ marginLeft: "31%" }}>
-        Today's news about cryptocurrencies
-      </Title>
+      <p className={styles.todayNews}>Today's Cryptocurrency News</p>
       <Row gutter={[24, 24]}>
         {news.value?.map((newItem) => (
           <Col xs={24} sm={12} lg={8} key={newItem.name}>
@@ -45,7 +43,7 @@ const News = () => {
                 <div style={{ display: "flex" }}>
                   <img
                     src={newItem?.image?.thumbnail?.contentUrl || demoImage}
-                    alt="news-image"
+                    alt="news-content"
                   />
                   <p className={styles.parDescription}>{newItem.description}</p>
                 </div>
@@ -57,15 +55,15 @@ const News = () => {
                         newItem.provider[0]?.image?.thumbnail?.contentUrl ||
                         demoImage
                       }
-                      alt=""
+                      alt="news-avatar"
                     />
                     <Text className={styles.providerName}>
                       {newItem.provider[0]?.name}
                     </Text>
                   </div>
-                  <Text style={{ marginTop: "1%" }}>
+                  <p className={styles.timeFromNow}>
                     {moment(newItem.datePublished).startOf("ss").fromNow()}
-                  </Text>
+                  </p>
                 </div>
               </a>
             </Card>

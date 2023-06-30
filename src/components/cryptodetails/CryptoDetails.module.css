@@ -117,7 +117,6 @@
     flex: 0.5;
 }
 
-
 .coinLink{
     display: flex;
     justify-content: space-between;
@@ -164,8 +163,6 @@
     .coinDetailContainer{
         margin: 0;
     }
-}
-@media screen and (max-width: 500px){
     .heading{
         margin-top: 20px;
     }
