@@ -21,7 +21,7 @@ const Nft = (props) => {
           "https://opensea.io/assets/ethereum/" + props.address + "/" + props.id
         }
         target="_blank"
-        style={{ marginLeft: "6rem" }}
+        style={{ display: "flex", justifyContent: "center" }}
       >
         {/*to access info about this pretty woman we need turn on vpn(*/}
         {props.title ? props.title : "#" + props.id}

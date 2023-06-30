@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Cryptocurrencies from "./components/cryptocurrencies/Cryptocurrencies";
-import Nfts from "./components/Nfts";
+import Nfts from "./components/nft/Nfts";
 import News from "./components/news/News";
 import NotFound from "./components/NotFound";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./components/home/Home";
 import CryptoDetails from "./components/cryptodetails/CryptoDetails";
-import RHForm from "./components/RHForm";
+import RHForm from "./components/form/RHForm";
 
 const App = () => {
   return (

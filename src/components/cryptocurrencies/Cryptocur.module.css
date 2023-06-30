@@ -8,6 +8,8 @@
 .cryptoCardContainer{
     padding-left: 9%;
     padding-right: 10%;
+    display: flex;
+    justify-content: center;
     margin-left: 0px !important;
     margin-right: 0px !important;
 }
@@ -29,4 +31,20 @@
 .titleNext {
     font-weight: normal;
     color: gray;
+}
+.topWorld {
+    display: flex;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+@media (max-width: 898px) {
+    .topWorld {
+        font-size: 2rem;
+    }
+}
+@media (max-width: 540px) {
+    .topWorld {
+        font-size: 1.5rem;
+    }
 }

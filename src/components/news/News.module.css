@@ -13,6 +13,14 @@
 .newsCard{
     min-height: 300px !important;
 }
+.todayNews {
+    display: flex;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
 .newsImageContainer{
     display: flex !important;
     justify-content: space-between !important;
@@ -52,7 +60,6 @@
 .parDescription {
     color: gray !important;
     padding-left: 3%;
-    /* white-space: nowrap; */
     overflow: hidden;
     text-overflow: ellipsis;
     display: -moz-box;
@@ -63,4 +70,20 @@
     line-clamp: 3;
     box-orient: vertical;
     height: 21vh;
+}
+.timeFromNow{
+    font-size: 0.8rem;
+}
+@media (max-width: 1088px) {
+    .todayNews {
+        font-size: 2rem;
+    }
+    .timeFromNow{
+        display: none;
+    }
+}
+@media (max-width: 640px) {
+    .todayNews {
+        font-size: 1.5rem;
+    }
 }

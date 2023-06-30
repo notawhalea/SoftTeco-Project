@@ -16,7 +16,7 @@ import {
 import axios from "axios";
 
 import styles from "./CryptoDetails.module.css";
-import LineChart from "../LineChart";
+import LineChart from "../linechart/LineChart";
 import { getApiOptions } from "../../utils";
 import {
   url,
@@ -101,7 +101,6 @@ const CryptoDetails = () => {
           {time.map((date) => (
             <Option key={date}>{date}</Option>
           ))}
-          {console.log(timePeriods)}
         </Select>
         <LineChart
           coinHistory={coinHistory}

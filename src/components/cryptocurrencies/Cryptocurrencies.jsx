@@ -35,10 +35,8 @@ const Cryptocurrencies = () => {
   );
 
   return (
-    <div style={{ marginTop: "1%" }}>
-      <Title level={1} style={{ marginLeft: "33%" }}>
-        Top 50 World Cryptocurrencies
-      </Title>
+    <div>
+      <p className={styles.topWorld}>Top 50 World Cryptocurrencies</p>
       <div className={styles.searchCrypto}>
         <Input
           placeholder="Search Cryptocurrency"

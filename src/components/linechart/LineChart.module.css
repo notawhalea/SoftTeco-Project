@@ -1,7 +1,7 @@
 .priceChart {
-    display: block;
+    display: flex;
+    justify-content: center;
     width: 100%;
-    margin-left: 26%;
     color: #0071bd;
     font-size: 1rem;
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import millify from "millify";
 import { Typography, Row, Col, Statistic } from "antd";
-import Coin from "../Coin";
+import Coin from "../coin/Coin";
 import styles from "./Home.module.css";
 import axios from "axios";
 
