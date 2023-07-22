@@ -6,6 +6,8 @@ Main stack of this application: *JavaScript, React.JS, Antd, Chakra-UI, HTML, CS
 
 This is my *vision* for the implementation of the *creation of a web application displaying all information about cryptocurrencies.
 
+[HOW IT'S LOOK LIKE](https://cryptons.netlify.app/)
+
 **Task**
 
 Сreate an application for processing api with the collection of news, statistics and information about cryptocurrencies. Primary requirements:
